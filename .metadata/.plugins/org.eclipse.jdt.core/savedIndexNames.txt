@@ -1,3 +1,0 @@
-INDEX VERSION 1.134+E:\Projetos Spring\oretornodoconceito\lorianMessenger\.metadata\.plugins\org.eclipse.jdt.core
-1865797976.index
-2278923467.index
