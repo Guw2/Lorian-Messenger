@@ -1,4 +1,4 @@
-package com.lorian.frontend_service.security;
+package com.lorian.auth_service.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
