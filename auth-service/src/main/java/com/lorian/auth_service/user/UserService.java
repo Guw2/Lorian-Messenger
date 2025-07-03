@@ -24,13 +24,13 @@ public class UserService {
 		this.authenticationManager = authenticationManager;
 	}
 
-	public UserGetDTO login(UserLoginDTO login) {
+	public Boolean login(UserLoginDTO login) {
 		if(repo.findByUsername(login.username()).isPresent()) {
 			try {
 				Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.username(), login.password()));
-				return new UserGetDTO((User) auth.getPrincipal());
+				return true;
 			}catch(Exception e) {
-				throw new RuntimeException("Invalid password.");
+				return false;
 			}
 		}
 		

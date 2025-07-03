@@ -22,7 +22,7 @@ public class UserAuthController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<UserGetDTO> login(@RequestBody UserLoginDTO dto) {
+	public ResponseEntity<Boolean> login(@RequestBody UserLoginDTO dto) {
 		return new ResponseEntity<>(service.login(dto), HttpStatus.ACCEPTED);
 	}
 	
