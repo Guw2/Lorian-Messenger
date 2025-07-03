@@ -16,6 +16,11 @@ services:
         ports:
             - 5672:5672
             - 15672:15672
+        volumes:
+            - ./rabbitmq-definitions.json:/etc/rabbitmq/definitions.json
+        environment:
+            RABBITMQ_LOAD_DEFINITIONS: /etc/rabbitmq/definitions.json
 
 volumes:
     lm_data:
+    lm_amqp:
