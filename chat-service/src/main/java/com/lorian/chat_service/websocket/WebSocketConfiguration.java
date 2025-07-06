@@ -8,7 +8,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
+public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer{
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
@@ -18,7 +18,9 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
 	
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/ws-chat").withSockJS();
+		registry.addEndpoint("/ws-chat")
+			.setAllowedOrigins("http://localhost:8080")
+			.withSockJS();
 	}
 	
 }
