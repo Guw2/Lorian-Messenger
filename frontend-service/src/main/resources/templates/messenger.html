@@ -14,16 +14,16 @@
 	<script type="text/javascript">
 	
 		function connect(){
-			const socket = new SockJS('http://localhost:8082/ws-chat');
-			stompClient = Stomp.over(socket);
-			
+			const socket = new SockJS('http://localhost:8082/ws-chat'); 
+			stompClient = Stomp.over(socket); 
+	
 			stompClient.connect({}, function (frame){
-				console.log('Conectado: ' + frame);
 				
 				stompClient.subscribe('/topic/public', function (messageOutput){
 					const message = JSON.parse(messageOutput.body);
 					showMessageOnScreen(message);
 				});
+				
 			});
 		}
 		

@@ -18,6 +18,7 @@ public class SecuritySettings {
 				.authorizeHttpRequests(req -> req
 						.requestMatchers(HttpMethod.GET, "/login").permitAll()
 						.requestMatchers(HttpMethod.POST, "/login").permitAll()
+						.requestMatchers(HttpMethod.GET, "/user/username").permitAll()
 						.anyRequest().authenticated())
 				.build();
 	}
