@@ -54,24 +54,6 @@ public class AuthenticationController {
 				
 	}
 	
-	@GetMapping("/user/username")
-	public String getLoggedUserUsername() {
-		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    if (authentication == null || !authentication.isAuthenticated()) {
-	        return null;
-	    }
-	    
-	    Object principal = authentication.getPrincipal();
-	    if (principal instanceof User) {
-	        return ((User) principal).getUsername();
-	    } else if (principal instanceof String) {
-	        return (String) principal;
-	    }
-	    
-	    return null;
-	}
-	
 	@GetMapping("/login")
 	public String loginPage() {
 		return "login";

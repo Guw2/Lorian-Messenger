@@ -1,4 +1,4 @@
-package com.lorian.chat_service.websocket;
+package com.lorian.frontend_service.websocket;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -18,9 +18,7 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer{
 	
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/ws-chat")
-			.setAllowedOrigins("http://localhost:8080")
-			.withSockJS();
+		registry.addEndpoint("ws-chat").setAllowedOriginPatterns("*").withSockJS();
 	}
 	
 }
