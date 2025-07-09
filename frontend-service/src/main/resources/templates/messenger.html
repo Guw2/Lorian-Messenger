@@ -2,15 +2,20 @@
 	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
 	<head>
-		<title>Messenger</title>
-		<meta charset="UTF-8">
-	</head>
-	<body>
-		<h1>Messenger</h1>
-		<input id="inputMessage" type="text" />
-		<button onclick="sendMessage()">Submit</button>
-		<div id="chat"></div>
-	</body>
+    <title>Messenger</title>
+    <meta charset="UTF-8">
+    </head>
+    <body style="font-family: arial;">
+      <div style="margin: auto; text-align: center; border: 2px black solid; width: 500px; padding-bottom: 100px;">
+        <h1>Messenger</h1>
+        <div>
+        	<input id="inputMessage" type="text" />
+        	<button onclick="sendMessage()">Submit</button>
+        </div>
+        <p style="padding-left: 15px; text-align: left; font-weight: bold;">Chat: </p>
+        <div id="chat" style="text-align: left; padding-left: 25px;"></div>
+      </div>
+    </body>
 	<script type="text/javascript">
 	
 		function connect(){
@@ -31,7 +36,7 @@
 			const content = document.getElementById("inputMessage").value;
 			
 			stompClient.send("/app/chat.send", {}, JSON.stringify({
-				sender: "user-example",
+				sender: "",
 				content: content,
 				timestamp: new Date().toISOString()
 			}))
