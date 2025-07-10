@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
-import com.lorian.frontend_service.security.authentication.DTOs.AuthenticationDTO;
-import com.lorian.frontend_service.security.authentication.DTOs.FormDTO;
+import com.lorian.frontend_service.security.authentication.DTOs.login.AuthenticationDTO;
+import com.lorian.frontend_service.security.authentication.DTOs.login.FormDTO;
+import com.lorian.frontend_service.security.authentication.DTOs.register.AuthenticationRegisterDTO;
+import com.lorian.frontend_service.security.authentication.DTOs.register.FormRegisterDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -54,9 +56,47 @@ public class AuthenticationController {
 				
 	}
 	
+	@PostMapping("/register")
+	public String handleRegister(@ModelAttribute FormRegisterDTO form) {
+		
+		if(!form.getPassword().equals(form.getConfirm_password()) 
+				|| form.getUsername().isBlank() 
+				|| form.getUsername().isEmpty()
+				|| form.getEmail().isBlank()
+				|| form.getEmail().isEmpty()
+				|| form.getPassword().isBlank()
+				|| form.getPassword().isEmpty()
+				|| form.getConfirm_password().isBlank()
+				|| form.getConfirm_password().isEmpty()) {
+			return "redirect:/register?error=error";
+		}
+		
+		RestTemplate template = new RestTemplate();
+		
+		AuthenticationRegisterDTO authenticationRegisterDTO = new AuthenticationRegisterDTO(
+				form.getUsername(), form.getEmail(), form.getPassword()
+		);
+		
+		ResponseEntity<Boolean> response = template.postForEntity(
+				"http://localhost:8081/auth/register",
+				authenticationRegisterDTO,
+				Boolean.class);
+		
+		if(Boolean.TRUE.equals(response.getBody())) {
+			return "redirect:/login";
+		}
+		
+		return "redirect:/register";
+	}
+	
 	@GetMapping("/login")
 	public String loginPage() {
 		return "login";
+	}
+	
+	@GetMapping("/register")
+	public String registerPage() {
+		return "register";
 	}
 	
 }

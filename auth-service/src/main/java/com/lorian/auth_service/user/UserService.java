@@ -37,7 +37,7 @@ public class UserService {
 		throw new UsernameNotFoundException("User \"" + login.username() + "\" does not exist.");
 	}
 	
-	public UserGetDTO register(UserRegisterDTO register) {
+	public Boolean register(UserRegisterDTO register) {
 		User user = new User();
 		user.setUsername(register.username());
 		user.setEmail(register.email());
@@ -45,7 +45,7 @@ public class UserService {
 		
 		repo.save(user);
 		
-		return new UserGetDTO(user);
+		return true;
 	}
 	
 }

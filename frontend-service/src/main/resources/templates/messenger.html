@@ -12,7 +12,7 @@
         	<input id="inputMessage" type="text" />
         	<button onclick="sendMessage()">Submit</button>
         </div>
-        <p style="padding-left: 15px; text-align: left; font-weight: bold;">Chat: </p>
+        <p style="padding-left: 15px; text-align: left; font-weight: bold;">Public Chat: </p>
         <div id="chat" style="text-align: left; padding-left: 25px;"></div>
       </div>
     </body>
@@ -45,7 +45,7 @@
 		function showMessageOnScreen(message){
 			const chat = document.getElementById("chat");
 			const newMessage = document.createElement("div");
-			newMessage.innerText = `[${message.timestamp}] ${message.sender} : ${message.content}`;
+			newMessage.innerHTML = `[${message.timestamp}] <span style="color: red;">${message.sender}</span>: ${message.content}`;
 			chat.appendChild(newMessage);
 		}
 		
