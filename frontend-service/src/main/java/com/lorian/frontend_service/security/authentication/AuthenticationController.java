@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.lorian.frontend_service.security.authentication.DTOs.login.AuthenticationDTO;
 import com.lorian.frontend_service.security.authentication.DTOs.login.FormDTO;
+import com.lorian.frontend_service.security.authentication.DTOs.login.InfoDTO;
 import com.lorian.frontend_service.security.authentication.DTOs.register.AuthenticationRegisterDTO;
 import com.lorian.frontend_service.security.authentication.DTOs.register.FormRegisterDTO;
 
@@ -35,13 +36,13 @@ public class AuthenticationController {
 		
 		AuthenticationDTO authenticationDto = new AuthenticationDTO(form.getUsername(), form.getPassword());
 		
-		ResponseEntity<Boolean> response = restTemplate.postForEntity(
+		ResponseEntity<InfoDTO> response = restTemplate.postForEntity(
 				"http://localhost:8081/auth/login",
 				authenticationDto,
-				Boolean.class
+				InfoDTO.class
 		);
 		
-		if(Boolean.TRUE.equals(response.getBody())) {
+		if(!response.getBody().equals(null)) {
 			UserDetails user = new User(form.getUsername(), "", List.of());
 			Authentication auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 			
