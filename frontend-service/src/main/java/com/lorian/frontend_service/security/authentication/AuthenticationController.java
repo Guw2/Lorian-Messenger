@@ -59,15 +59,7 @@ public class AuthenticationController {
 	@PostMapping("/register")
 	public String handleRegister(@ModelAttribute FormRegisterDTO form) {
 		
-		if(!form.getPassword().equals(form.getConfirm_password()) 
-				|| form.getUsername().isBlank() 
-				|| form.getUsername().isEmpty()
-				|| form.getEmail().isBlank()
-				|| form.getEmail().isEmpty()
-				|| form.getPassword().isBlank()
-				|| form.getPassword().isEmpty()
-				|| form.getConfirm_password().isBlank()
-				|| form.getConfirm_password().isEmpty()) {
+		if(VerifyRegister.verify(form)) {
 			return "redirect:/register?error=error";
 		}
 		
